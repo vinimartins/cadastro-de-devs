@@ -16,7 +16,6 @@ module.exports = {
 
             let dev = await Dev.findOne({ github_username });
             if (!dev) {
-
                 const result = await axios.get(`https://api.github.com/users/${github_username}`);
                 const { name = login, avatar_url, bio } = result.data;
                 const techsArray = parseStringAsArray(techs);
@@ -34,8 +33,12 @@ module.exports = {
                     techs: techsArray,
                     location
                 })
+                return res.status(200).json({
+                    "message": "Dev inserted successfully",
+                    dev
+                })
             }
-            return res.status(200).send(`Dev inserted successfully`)
+
         }
         catch (err) { res.status(500).send(err) }
     }

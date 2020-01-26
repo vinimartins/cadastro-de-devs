@@ -29,8 +29,7 @@ function App() {
   async function handleAddDev(data) {
     try {
       const response = await api.post('/devs', data);
-      setDevs([...devs, response.data])
-
+      setDevs([...devs, response.data.dev])
     } catch (error) {
       console.log(error)
     }
